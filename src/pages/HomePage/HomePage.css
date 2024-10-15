@@ -1,0 +1,47 @@
+.container {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 65vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 0;
+}
+.slide {
+  height: 65vh;
+  width: 100vw;
+  background-size: cover;
+}
+.card {
+  max-width: 200px;
+  width: 200px;
+  margin: 8px;
+  background-color: rgb(245, 242, 242);
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.div-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.title-book {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 150px;
+  margin-top: 10px;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-drawer .ant-drawer-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: auto;
+}

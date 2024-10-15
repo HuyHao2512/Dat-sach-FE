@@ -1,0 +1,19 @@
+.layout {
+  min-height: 100vh;
+}
+
+.ant-layout-header {
+  background-color: #001529;
+}
+
+.ant-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ant-avatar {
+  border: 2px solid #1890ff;
+}
+
+.ant-btn-primary {
+  margin-top: 20px;
+}

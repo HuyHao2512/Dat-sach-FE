@@ -1,0 +1,15 @@
+.cart-item {
+  border-radius: 5px solid #e0e0e0;
+  background-color: rgb(245, 243, 243);
+  padding: 20px;
+  margin: 20px;
+}
+.cart-content {
+  background-color: white;
+}
+.cart-item-image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 5px;
+}

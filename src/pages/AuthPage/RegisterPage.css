@@ -1,0 +1,17 @@
+.content-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(184, 180, 180);
+  background-color: rgb(242, 239, 239);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 15px;
+}
+.form-register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: "100%";
+}
