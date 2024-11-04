@@ -26,13 +26,13 @@
   width: 150px;
   margin-top: 10px;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-drawer .ant-drawer-mask {
+/* :where(.css-dev-only-do-not-override-11lehqq).ant-drawer .ant-drawer-mask {
   position: absolute;
   inset: 0;
   z-index: 1000;
   background: rgba(0, 0, 0, 0);
   pointer-events: auto;
-}
+} */
 .center-content {
   padding: 20px;
   display: flex;

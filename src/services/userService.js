@@ -62,7 +62,7 @@ export const updateItemInCart = async ({ userId, bookId, quantity }) => {
 export const deleteItemInCart = async ({ userId, bookId }) => {
   const token = localStorage.getItem("access_token");
   const response = await axios.delete(
-    `http://localhost:8080/api/cart/user/${userId}`,
+    `http://localhost:8080/api/cart/removecart`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
