@@ -1,15 +1,12 @@
 import HomePage from "../pages/HomePage/HomePage";
 import OrderPage from "../pages/OrderPage/OrderPage";
-import ProductPage from "../pages/ProductPage/ProductPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
-import LoginPage from "../pages/AuthPage/LoginPage";
-import RegisterPage from "../pages/AuthPage/RegisterPage";
 import OrderDetailPage from "../pages/OrderPage/OrderDetailPage";
-import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import CartPage from "../pages/CartPage/CartPage";
 import AdminPage from "../pages/AdminPage/AdminPage";
-import EditPage from "../pages/AdminPage/EditPage";
-import path from "path";
+import CategoryPage from "../pages/AdminPage/CategoryPage";
+import OrderPageAdmin from "../pages/AdminPage/OrderPageAdmin";
+import LayoutComponent from "../components/LayoutComponent/LayoutComponent";
 export const routes = [
   {
     path: "/",
@@ -22,43 +19,36 @@ export const routes = [
     isShowHeader: true,
   },
   {
-    path: "/product",
-    page: ProductPage,
-    isShowHeader: true,
-  },
-  {
-    path: "*",
-    page: NotFoundPage,
-  },
-  {
-    path: "/login",
-    page: LoginPage,
-  },
-  {
-    path: "/register",
-    page: RegisterPage,
-  },
-  {
     path: "/user/:id",
     page: CartPage,
     isShowHeader: true,
   },
   {
-    path: "/orderdetail",
+    path: "/orderdetail/:id",
     page: OrderDetailPage,
     isShowHeader: true,
   },
   {
-    path: "/profile",
-    page: ProfilePage,
-    isShowHeader: true,
-  },
-  {
     path: "/admin",
-    page: AdminPage,
+    page: LayoutComponent,
+    isShowHeader: false,
+    children: [
+      {
+        path: "dashboard",
+        page: AdminPage,
+      },
+      {
+        path: "category",
+        page: CategoryPage,
+      },
+      {
+        path: "order",
+        page: OrderPageAdmin,
+      },
+    ],
   },
   {
-    path: "/admin/edit",
-    page: EditPage,
+    path: "*",
+    page: NotFoundPage,
   },
 ];

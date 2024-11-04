@@ -1,0 +1,4 @@
+.sider-content {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+}

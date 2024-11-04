@@ -1,55 +1,16 @@
-import React from "react";
 import { Row, Col } from "antd";
 import { Card, Pagination } from "antd";
 import { Divider } from "antd";
 import { useState } from "react";
-import { MenuUnfoldOutlined } from "@ant-design/icons";
-import { Drawer, Button, Space, InputNumber } from "antd";
-import { Menu } from "antd";
+import { Drawer, Button, Space, InputNumber, message } from "antd";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as userService from "../../services/userService";
+import { useRef } from "react";
 import axios from "axios";
-
 import "./HomePage.css";
-const items = [
-  {
-    label: "Bộ lọc",
-    key: "SubMenu",
-    icon: <MenuUnfoldOutlined />,
-    children: [
-      {
-        type: "group",
-        label: "Theo giá",
-        children: [
-          {
-            label: "Từ thấp đến cao",
-            key: "setting:1",
-          },
-          {
-            label: "Từ cao đến thấp",
-            key: "setting:2",
-          },
-        ],
-      },
-      {
-        type: "group",
-        label: "Theo A-Z",
-        children: [
-          {
-            label: "Từ A-Z",
-            key: "setting:3",
-          },
-          {
-            label: "Từ Z-A",
-            key: "setting:4",
-          },
-        ],
-      },
-    ],
-  },
-];
 const LIMIT = 8;
 function HomePage() {
+  const booksRef = useRef(null);
   const fetchApi = async (page) => {
     const response = await axios.get(
       `http://localhost:8080/api/book/getallbooks?page=${page}`
@@ -61,24 +22,19 @@ function HomePage() {
       userService.addToCart({ bookId, quantity, userId }),
     onSuccess: (data) => {
       console.log("Da them vao gio hang:", data.data);
+      message.success("Thêm vào giỏ hàng thành công");
     },
     onError: (error) => {
       console.error("Error adding book to cart:", error);
+      message.error("Bạn chưa đăng nhập hoặc có lỗi xảy ra");
     },
   });
-
-  const [current, setCurrent] = useState("mail");
   const [currentPage, setCurrentPage] = useState(1);
 
   const { isError, isLoading, data } = useQuery({
     queryKey: ["books", currentPage],
     queryFn: () => fetchApi(currentPage),
   });
-
-  const onClick = (e) => {
-    console.log("click ", e);
-    setCurrent(e.key);
-  };
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [bookId, setBookId] = useState(null);
@@ -96,14 +52,22 @@ function HomePage() {
   const onPageChange = (num) => {
     setCurrentPage(num);
   };
+  const handleExploreClick = () => {
+    // Cuộn đến phần danh sách sách
+    if (booksRef.current) {
+      booksRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div style={{ paddingTop: "200px", paddingLeft: "500px" }}>
+        <img src="public/Loading.gif" alt="" />
+      </div>
+    );
   }
   if (isError) {
     return <h1>Error</h1>;
   }
-  console.log("quantities", quantity);
-  console.log("itemId", bookId);
   const handleAddToCart = () => {
     if (!bookId) {
       console.error("Book ID is missing");
@@ -114,29 +78,90 @@ function HomePage() {
       quantity: quantity,
       userId: localStorage.getItem("userId"),
     });
-    alert("Thêm vào giỏ hàng thành công");
     onClose(); // Đóng Drawer sau khi thêm vào giỏ hàng
   };
   return (
     <div>
       <div>
-        <img
-          src="public/slide.png"
-          alt=""
-          className="slide"
-          style={{ width: "100%" }}
-          loading="lazy"
-        />
+        <div className="flex-container">
+          <div className="text-center">
+            <h1>
+              <span
+                className="fade-in"
+                id="digit1"
+                style={{ fontWeight: "bold" }}
+              >
+                CHÀO&nbsp;
+              </span>
+              <span
+                className="fade-in"
+                id="digit2"
+                style={{ fontWeight: "bold" }}
+              >
+                MỪNG&nbsp;
+              </span>
+              <span
+                className="fade-in"
+                id="digit3"
+                style={{ fontWeight: "bold" }}
+              >
+                BẠN
+              </span>
+            </h1>
+            <h3
+              className="fadeIn"
+              style={{
+                fontSize: "50px",
+              }}
+            >
+              <img src="public/book.png" style={{ height: "60px" }} /> ĐẾN VỚI
+              NHÀ SÁCH PHƯƠNG NAM{" "}
+              <img src="public/book.png" style={{ height: "60px" }} />
+            </h3>
+            <button type="button" name="button" onClick={handleExploreClick}>
+              KHÁM PHÁ NGAY
+            </button>
+          </div>
+        </div>
+      </div>
+      <div ref={booksRef}>
+        <Row>
+          <Col span={20} offset={2}>
+            <Row>
+              <Col span={8} className="center-content">
+                <img src="public/books.gif" style={{ width: "300px" }} />
+                <h2>
+                  Chúng tôi cung cấp nhiều thể loại sách, đa dạng các phiên bản,
+                  hứa hẹn sẽ làm đọc giả thỏa thích lựa chọn
+                </h2>
+              </Col>
+              <Col span={8} className="center-content">
+                <img src="public/cashback.gif" style={{ width: "300px" }} />
+                <h2>
+                  Chúng tôi đảm bảo chất lượng sách luôn đảm bảo, nếu có sai sót
+                  chúng tôi sẽ hoàn tiền một cách minh bạch
+                </h2>
+              </Col>
+              <Col span={8} className="center-content">
+                <img
+                  src="public/delivery-truck.gif"
+                  style={{ width: "300px" }}
+                />
+                <h2>
+                  Với dịch vụ vận chuyển đa dạng, chúng tôi sẽ đem sách đến cho
+                  bạn với thời gian cực kỳ nhanh chóng
+                </h2>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </div>
       <Divider style={{ borderColor: "#4fb0dc" }}>
-        <h1>Có thể bạn thích</h1>
+        <h1>
+          Có thể bạn thích{" "}
+          <img src="public/library.gif" style={{ height: "60px" }} />
+        </h1>
       </Divider>
-      <Menu
-        onClick={onClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-        items={items}
-      />
       <div>
         <Row>
           <Col span={20} offset={2}>
@@ -198,11 +223,7 @@ function HomePage() {
                             onChange={handleQuantityChange}
                             style={{ marginRight: "10px" }}
                           />
-                          <Button
-                            type="primary"
-                            onClick={handleAddToCart}
-                            style={{ marginBottom: "20px" }}
-                          >
+                          <Button type="primary" onClick={handleAddToCart}>
                             Thêm vào giỏ hàng
                           </Button>
                         </Space>

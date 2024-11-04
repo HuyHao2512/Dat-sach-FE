@@ -1,15 +1,3 @@
-.container {
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 65vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-  padding: 0;
-}
 .slide {
   height: 65vh;
   width: 100vw;
@@ -44,4 +32,12 @@
   z-index: 1000;
   background: rgba(0, 0, 0, 0);
   pointer-events: auto;
+}
+.center-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Đặt các phần tử theo cột */
+  align-items: center; /* Căn giữa nội dung theo chiều ngang */
+  justify-content: center; /* Căn giữa nội dung theo chiều dọc nếu chiều cao cho phép */
+  text-align: center; /* Căn giữa văn bản */
 }
