@@ -43,10 +43,12 @@ function LayoutComponent() {
     onSuccess: () => {
       console.log("Logout successful");
       // Xóa các token và thông tin đăng nhập từ localStorage
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       localStorage.removeItem("username");
       localStorage.removeItem("userId");
+      localStorage.removeItem("roles");
+      localStorage.removeItem("user");
       // Cập nhật trạng thái đăng xuất
       setIsLoggedIn(false);
       navigate("/");
@@ -56,7 +58,7 @@ function LayoutComponent() {
     },
   });
   const handleLogout = () => {
-    const refreshToken = localStorage.getItem("refresh_token");
+    const refreshToken = localStorage.getItem("refreshToken");
     if (refreshToken) {
       mutationLogout.mutate(refreshToken); // Gọi mutate với refresh token
     } else {

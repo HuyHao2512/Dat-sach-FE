@@ -32,7 +32,6 @@ function OrderDetailPage() {
     queryKey: ["orders", userId],
     queryFn: () => userService.getOrderByUser(userId),
   });
-
   const mutationCancle = useMutation({
     mutationFn: (order) => adminService.updateOrder(order.id, order),
     onSuccess: () => {

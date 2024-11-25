@@ -1,13 +1,19 @@
 import axios from "axios";
 //category
 export const getAllCategories = async () => {
+  const token = localStorage.getItem("accessToken");
   const response = await axios.get(
-    "http://localhost:8080/api/category/getallcategories"
+    "http://localhost:8080/api/category/getallcategories",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response;
 };
 export const createCategory = async (data) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.post(
     "http://localhost:8080/api/category/createcategory",
     data,
@@ -21,7 +27,7 @@ export const createCategory = async (data) => {
   return response;
 };
 export const editCategory = async (id, data) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.put(
     `http://localhost:8080/api/category/updatecategory/${id}`,
     data,
@@ -35,7 +41,7 @@ export const editCategory = async (id, data) => {
   return response.data; // Chỉ trả về data từ response
 };
 export const deleteCategory = async (id) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.delete(
     `http://localhost:8080/api/category/deletecategory/${id}`,
     {
@@ -49,7 +55,7 @@ export const deleteCategory = async (id) => {
 };
 
 export const createBook = async (data) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.post(
     "http://localhost:8080/api/book/createbook",
     data,
@@ -63,7 +69,7 @@ export const createBook = async (data) => {
   return response;
 };
 export const editBook = async (id, data) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.put(
     `http://localhost:8080/api/book/updatebook/${id}`,
     data,
@@ -77,7 +83,7 @@ export const editBook = async (id, data) => {
   return response.data;
 };
 export const deleteBook = async (id) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.delete(
     `http://localhost:8080/api/book/deletebook/${id}`,
     {
@@ -90,7 +96,7 @@ export const deleteBook = async (id) => {
   return response;
 };
 export const getAllOrders = async () => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.get(
     "http://localhost:8080/api/order/getallorders",
     {
@@ -102,7 +108,7 @@ export const getAllOrders = async () => {
   return response.data;
 };
 export const updateOrder = async (id, data) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.put(
     `http://localhost:8080/api/order/updateorder/${id}`, // Đảm bảo ID là chuỗi hợp lệ
     data,

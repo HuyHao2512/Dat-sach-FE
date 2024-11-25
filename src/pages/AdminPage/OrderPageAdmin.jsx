@@ -120,7 +120,7 @@ function OrderPageAdmin() {
         dataSource={data} // Dữ liệu từ API
         columns={columns} // Các cột đã cấu hình
         rowKey="_id" // Khóa duy nhất cho từng hàng
-        pagination={{ pageSize: 10 }} // Phân trang
+        pagination={{ pageSize: 10, defaultCurrent: 1 }} // Phân trang
       />
       <Modal
         title="Chỉnh sửa trạng thái đơn hàng"

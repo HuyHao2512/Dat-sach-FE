@@ -10,9 +10,15 @@ import {
   InputNumber,
   Upload,
   message,
+  Popover,
 } from "antd";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  UploadOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import * as adminService from "../../services/adminService";
 import axios from "axios";
 import "./AdminPage.css";
@@ -158,7 +164,16 @@ function AdminPage() {
       console.error("Error uploading image:", error);
     }
   };
-
+  const contentEdit = (
+    <div>
+      <h3>Chỉnh sửa</h3>
+    </div>
+  );
+  const contentDelete = (
+    <div>
+      <h3>Xóa</h3>
+    </div>
+  );
   const bookData = Array.isArray(data.data) ? data.data : [];
   const columns = [
     {
@@ -194,24 +209,28 @@ function AdminPage() {
       key: "action",
       render: (_, record) => (
         <>
-          <Button
-            type="primary"
-            onClick={() => showEditModal(record)}
-            style={{
-              marginRight: "8px",
-              backgroundColor: "orange",
-              marginBottom: "20px",
-            }}
-          >
-            Chỉnh sửa
-          </Button>
-          <Button
-            type="danger"
-            onClick={() => handleDeleteBook(record._id)}
-            style={{ backgroundColor: "#f33135" }}
-          >
-            Xóa
-          </Button>
+          <Popover content={contentEdit}>
+            <Button
+              type="primary"
+              onClick={() => showEditModal(record)}
+              style={{
+                marginRight: "8px",
+                backgroundColor: "orange",
+                marginBottom: "20px",
+              }}
+            >
+              <EditOutlined />
+            </Button>
+          </Popover>
+          <Popover content={contentDelete}>
+            <Button
+              type="danger"
+              onClick={() => handleDeleteBook(record._id)}
+              style={{ backgroundColor: "#f33135" }}
+            >
+              <DeleteOutlined />
+            </Button>
+          </Popover>
         </>
       ),
     },

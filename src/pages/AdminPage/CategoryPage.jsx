@@ -148,7 +148,15 @@ function CategoryPage() {
         <PlusOutlined />
         Thêm loại sách
       </Button>
-      <Table columns={columns} dataSource={data?.data} rowKey="_id" />
+      <Table
+        columns={columns}
+        dataSource={data?.data}
+        rowKey="_id"
+        pagination={{
+          pageSize: 5, // Số mục hiển thị cố định trên mỗi trang
+          defaultCurrent: 1, // Trang bắt đầu
+        }}
+      />
 
       {/* Modal thêm loại sách */}
       <Modal

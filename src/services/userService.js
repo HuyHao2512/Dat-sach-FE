@@ -1,7 +1,9 @@
 import axios from "axios";
+import TokenService from "./token.service";
 export const login = async (data) => {
+  // Gửi yêu cầu đăng nhập đến backend
   const res = await axios.post("http://localhost:8080/api/auth/signin/", data);
-  return res;
+  return res; // Trả về kết quả cho các hàm gọi sau
 };
 export const register = async (data) => {
   const res = await axios.post("http://localhost:8080/api/auth/signup/", data);
@@ -14,7 +16,7 @@ export const logout = async ({ token }) => {
   return res.data;
 };
 export const addToCart = async ({ bookId, quantity, userId }) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.post(
     "http://localhost:8080/api/cart/addtocart",
     {
@@ -31,7 +33,7 @@ export const addToCart = async ({ bookId, quantity, userId }) => {
   return response;
 };
 export const getCart = async (userId) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.get(
     `http://localhost:8080/api/cart/user/${userId}`,
     {
@@ -43,7 +45,7 @@ export const getCart = async (userId) => {
   return response;
 };
 export const updateItemInCart = async ({ userId, bookId, quantity }) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.put(
     `http://localhost:8080/api/cart/user/${userId}`,
     {
@@ -60,7 +62,7 @@ export const updateItemInCart = async ({ userId, bookId, quantity }) => {
   return response;
 };
 export const deleteItemInCart = async ({ userId, bookId }) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.delete(
     `http://localhost:8080/api/cart/removecart`,
     {
@@ -76,7 +78,7 @@ export const deleteItemInCart = async ({ userId, bookId }) => {
   return response;
 };
 export const createOrder = async (data) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.post(
     "http://localhost:8080/api/order/createorder",
     data,
@@ -89,20 +91,22 @@ export const createOrder = async (data) => {
   return response;
 };
 export const removeUserCart = async ({ userId }) => {
-  const token = localStorage.getItem("access_token");
-  const response = await axios.post(
-    "http://localhost:8080/api/cart/removecart",
-    { userId },
+  const token = localStorage.getItem("accessToken");
+  const response = await axios.delete(
+    "http://localhost:8080/api/cart/removeusercart",
     {
       headers: {
         Authorization: `Bearer ${token}`,
+      },
+      data: {
+        userId,
       },
     }
   );
   return response;
 };
 export const getOrderByUser = async (userId) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("accessToken");
   const response = await axios.get(
     `http://localhost:8080/api/order/getorderbyuser/${userId}`,
     {
